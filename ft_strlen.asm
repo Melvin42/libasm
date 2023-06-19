@@ -1,12 +1,14 @@
 			global	ft_strlen
 			section	.text
 ft_strlen:
-			inc		rdx
-			cmp		rdi, 0
-			jne		ft_strlen
-			ret
+			xor		rax, rax
 
-;			int i = 0;
-;			while (str[i] != '\0')
-;				i++;
-;			return i;
+loop:
+			mov		dl, byte [rdi + rax]
+			cmp		dl, 0x0
+			je		end
+			inc		rax
+			jmp		loop
+
+end:
+			ret

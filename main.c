@@ -9,11 +9,54 @@ size_t	ft_strlen(const char *s);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
 
-int main(int ac, char **av) {/
+int main(int ac, char **av) {
 	char str[13] = "Hello World!\n";
+	char str1[13] = "Hello Worl!\n";
+	char str2[12] = "Hello Wor!\n";
+	char str3[11] = "Hello Wo!\n";
+	char str4[10] = "Hello W!\n";
+	char str5[9] = "Hello !\n";
+	char str6[8] = "Hello!\n";
+	char str7[7] = "Hell!\n";
+	char str8[6] = "Hel!\n";
+	char str9[5] = "He!\n";
+	char str10[4] = "H!\n";
+	char str11[3] = "H\n";
+	char str12[2] = "H";
+	char str13[1] = "";
 
+
+	printf("%ld\n", strlen(av[1]));
+	printf("%ld\n", ft_strlen(av[1]));
+	printf("%ld\n", strlen(str));
+	printf("%ld\n", strlen(str1));
+	printf("%ld\n", strlen(str2));
+	printf("%ld\n", strlen(str3));
+	printf("%ld\n", strlen(str4));
+	printf("%ld\n", strlen(str5));
+	printf("%ld\n", strlen(str6));
+	printf("%ld\n", strlen(str7));
+	printf("%ld\n", strlen(str8));
+	printf("%ld\n", strlen(str9));
+	printf("%ld\n", strlen(str10));
+	printf("%ld\n", strlen(str11));
+	printf("%ld\n", strlen(str12));
+	printf("%ld\n", strlen(str13));
 
 	printf("%ld\n", ft_strlen(str));
+	printf("%ld\n", ft_strlen(str1));
+	printf("%ld\n", ft_strlen(str2));
+	printf("%ld\n", ft_strlen(str3));
+	printf("%ld\n", ft_strlen(str4));
+	printf("%ld\n", ft_strlen(str5));
+	printf("%ld\n", ft_strlen(str6));
+	printf("%ld\n", ft_strlen(str7));
+	printf("%ld\n", ft_strlen(str8));
+	printf("%ld\n", ft_strlen(str9));
+	printf("%ld\n", ft_strlen(str10));
+	printf("%ld\n", ft_strlen(str11));
+	printf("%ld\n", ft_strlen(str12));
+	printf("%ld\n", ft_strlen(str13));
 	//printf("%ld\n", strlen(str));
 //	int		ret = 0;
 //	int		fd = 0;
