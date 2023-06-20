@@ -10,6 +10,7 @@ char	*ft_strcpy(char *dest, const char *src);
 int		ft_strcmp(const char *s1, const char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
+char	*ft_strdup(const char *s);
 
 int main(int ac, char **av) {
 
@@ -65,18 +66,18 @@ int main(int ac, char **av) {
 
 /***************************	FT_STRCPY TESTS	*******************************/
 
-	char	dest_cpy[7] = "Hello\n";
-	char	src_cpy[7] = "World\n";
-	char	dest_cpy2[7] = "World\n";
-	char	src_cpy2[14] = "Hello World!\n";
-
-
-	printf("dest before = %s\n", dest_cpy);
-	printf("%s\n", ft_strcpy(dest_cpy, src_cpy));
-	printf("dest after = %s\n", dest_cpy);
-	printf("dest before = %s\n", dest_cpy2);
-	printf("%s\n", ft_strcpy(dest_cpy2, src_cpy2));
-	printf("dest before = %s\n", dest_cpy2);
+//	char	dest_cpy[7] = "Hello\n";
+//	char	src_cpy[7] = "World\n";
+//	char	dest_cpy2[7] = "World\n";
+//	char	src_cpy2[14] = "Hello World!\n";
+//
+//
+//	printf("dest before = %s\n", dest_cpy);
+//	printf("%s\n", ft_strcpy(dest_cpy, src_cpy));
+//	printf("dest after = %s\n", dest_cpy);
+//	printf("dest before = %s\n", dest_cpy2);
+//	printf("%s\n", ft_strcpy(dest_cpy2, src_cpy2));
+//	printf("dest before = %s\n", dest_cpy2);
 /***************************	FT_STRCMP TESTS	*******************************/
 
 //	char str[13] = "Hello World!\n";
@@ -122,5 +123,19 @@ int main(int ac, char **av) {
 //	printf("%ld\n", write(-1, "Hello World!\n", 13));
 //	printf("%d\n", errno);
 //	fflush(stdout);
+
+/***************************	FT_STRDUP TESTS	*******************************/
+
+	char	str_to_dup[14] = "Hello World!\n";
+	char	*str_to_dup2 = NULL; // = malloc(sizeof(char) * 14);
+
+	str_to_dup2 = strdup(str_to_dup);
+	printf("std = %s\n", str_to_dup2);
+
+	free(str_to_dup2);
+	str_to_dup2 = NULL;
+	str_to_dup2 = ft_strdup(str_to_dup);
+	printf("ft = %s\n", str_to_dup2);
+
 	return 0;
 }
