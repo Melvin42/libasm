@@ -60,9 +60,15 @@ int main(int ac, char **av) {
 //	printf("%ld\n", ft_strlen(str13));
 
 	char strtocmp[14] = "Hello World!\n";
-	char strtocmp2[14] = "Hello World?\n";
+	char strtocmp2[14] = "Hello World!\n";
 
-	printf("%d\n", ft_strcmp(strtocmp, strtocmp2));
+	char strtocmp3[14] = "Hello World!\n";
+	char strtocmp4[14] = "Hello World?\n";
+
+	printf("same = %d\n", strcmp(strtocmp, strtocmp2));
+	printf("ft same = %d\n", ft_strcmp(strtocmp, strtocmp2));
+	printf("diff = %d\n", strcmp(strtocmp3, strtocmp4));
+	printf("ft diff = %d\n", ft_strcmp(strtocmp3, strtocmp4));
 
 //	int		ret = 0;
 //	int		fd = 0;
