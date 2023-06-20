@@ -12,8 +12,6 @@ count_loop:
 			je		cpy_loop
 			inc		rax
 			jmp		count_loop
-
-malloc_str:
 			inc		rax
 			push	rax
 			call	malloc wrt ..plt
