@@ -11,7 +11,10 @@ t_list *ft_create_elem(void *data) {
 	t_list *elem = malloc(sizeof(*elem) * 1);
 	elem->data = data;
 	elem->next = NULL;
+
+	return elem;
 }
+
 int ft_list_size(t_list *begin_list) {
 	int i;
 
@@ -25,11 +28,9 @@ int ft_list_size(t_list *begin_list) {
 }
 
 void ft_list_push_front(t_list **begin_list, void *data) {
-	t_list *elem = malloc(sizeof(*elem) * 1);
-
+	t_list *elem = ft_create_elem(data);
 	t_list *tmp = *begin_list;
 
-	elem->data = data;
 	*begin_list = elem;
 	(*begin_list)->next = tmp;
 }
@@ -49,21 +50,25 @@ int ft_strcmp(char *s1, char *s2) {
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *)) {
 	t_list *tmp = NULL;
 	t_list *start = *begin_list;
-	t_list *prev = *begin_list;
 
+	while (*begin_list && (*cmp)((*begin_list)->data, data_ref) == 0) {
+		tmp = *begin_list;
+		*begin_list = (*begin_list)->next;
+		(*free_fct)(tmp->data);
+		(*free_fct)(tmp);
+	}
+
+	*begin_list = start;
 	while (*begin_list) {
-		printf("%d\n", *((int *)(*begin_list)->data));
-		if ((*cmp)((*begin_list)->data, data_ref) == 0) {
+		if ((*begin_list)->next && (*cmp)((*begin_list)->next->data, data_ref) == 0) {
 			tmp = *begin_list;
-			prev->next = (*begin_list)->next;
-			printf("remove %d\n", *((int *)(*begin_list)->data));
-			if ((*begin_list)->next)
-				(*begin_list)->next = (*begin_list)->next->next;
 
-			(*free_fct)(tmp->data);
-			tmp->data = NULL;
-			(*free_fct)(tmp);
-			tmp = NULL;
+			*begin_list = (*begin_list)->next;
+			tmp->next = (*begin_list)->next;
+
+			(*free_fct)((*begin_list)->data);
+			(*free_fct)(*begin_list);
+			*begin_list = tmp;
 			continue;
 		}
 		*begin_list = (*begin_list)->next;
@@ -73,7 +78,6 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (
 
 int main(void) {
 	t_list *list = NULL;
-	printf("%p\n", &list);
 
 	int *n = malloc(sizeof(int) * 1);
 	int *n1 = malloc(sizeof(int) * 1);
