@@ -103,7 +103,7 @@ int main(void) {
 	*data_ref = 42;
 
 	printf("%d\n", ft_list_size(list));
-	list = ft_create_elem(n);
+//	list = ft_create_elem(n);
 	ft_list_push_front(&list, n1);
 	ft_list_push_front(&list, n2);
 	ft_list_push_front(&list, n3);

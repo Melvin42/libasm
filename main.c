@@ -18,7 +18,6 @@ typedef struct s_list
 	struct s_list *next;
 } t_list;
 
-
 void ft_list_push_front(t_list **begin_list, void *data);
 t_list *ft_create_elem(void *data);
 
@@ -148,13 +147,22 @@ int main(int ac, char **av) {
 //	printf("ft = %s\n", str_to_dup2);
 
 /***************************	FT_CREATE_ELEM TESTS	*******************************/
-	t_list *list;
-
+	t_list *list = NULL;
 	int *n = malloc(sizeof(int) * 1);
+	int *n1 = malloc(sizeof(int) * 1);
 	*n = 42;
+	*n1 = 43;
 
-	list = ft_create_elem(n);
-	printf("%d\n", *(int*)(list)->data);
+	ft_list_push_front(&list, n);
+	ft_list_push_front(&list, n1);
+//	t_list *tmp = list;
+//	while (tmp) {
+		printf("ptr = %p, data = %d, next = %p\n", list, *(int*)list->data, list->next);
+	list = list->next;
+		printf("ptr = %p, data = %d, next = %p\n", list, *(int*)list->data, list->next);
+//		tmp = tmp->next;
+//	}
+//	printf("%d\n", *(int*)list->data);
 
 	return 0;
 }
