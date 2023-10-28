@@ -19,7 +19,9 @@ typedef struct s_list
 } t_list;
 
 void ft_list_push_front(t_list **begin_list, void *data);
-t_list *ft_create_elem(void *data);
+int ft_list_size(t_list *begin_list);
+void ft_list_remove_if(t_list **begin_list, void *data_ref,
+		int (*cmp)(), void (*free_fct)(void *));
 
 int main(int ac, char **av) {
 
@@ -147,22 +149,57 @@ int main(int ac, char **av) {
 //	printf("ft = %s\n", str_to_dup2);
 
 /***************************	FT_CREATE_ELEM TESTS	*******************************/
-	t_list *list = NULL;
-	int *n = malloc(sizeof(int) * 1);
-	int *n1 = malloc(sizeof(int) * 1);
+	t_list	*list = NULL;
+	int		*n = malloc(sizeof(int) * 1);
+	int		*n1 = malloc(sizeof(int) * 1);
+	int		*n2 = malloc(sizeof(int) * 1);
+	int		*n3 = malloc(sizeof(int) * 1);
+	int		*n4 = malloc(sizeof(int) * 1);
+	char	*n5 = malloc(sizeof(char) * 1);
+	char	*n6 = malloc(sizeof(char) * 1);
+	char	*n7 = malloc(sizeof(char) * 5);
 	*n = 42;
 	*n1 = 43;
+	*n2 = 44;
+	*n3 = 45;
+	*n4 = 46;
+	*n5 = 'A';
+	*n6 = '\x42';
+	n7 = "\x42\x42\x42\x42\x00";
 
+	printf("List size = %d\n", ft_list_size(list));
 	ft_list_push_front(&list, n);
 	ft_list_push_front(&list, n1);
+	ft_list_push_front(&list, n2);
+	ft_list_push_front(&list, n3);
+	ft_list_push_front(&list, n4);
+	ft_list_push_front(&list, n5);
+	ft_list_push_front(&list, n6);
+	ft_list_push_front(&list, n7);
+	printf("List size = %d\n", ft_list_size(list));
+
 //	t_list *tmp = list;
+//	printf("ptr = %p, data = %s, next = %p\n", tmp,
+//			(char*)tmp->data, tmp->next);
 //	while (tmp) {
-		printf("ptr = %p, data = %d, next = %p\n", list, *(int*)list->data, list->next);
-	list = list->next;
-		printf("ptr = %p, data = %d, next = %p\n", list, *(int*)list->data, list->next);
+//		printf("ptr = %p, data = %d, next = %p\n", tmp,
+//				*(int*)tmp->data, tmp->next);
+//		printf("ptr = %p, data = %c, next = %p\n", tmp,
+//				*(char*)tmp->data, tmp->next);
 //		tmp = tmp->next;
 //	}
-//	printf("%d\n", *(int*)list->data);
 
+	int		*n8 = malloc(sizeof(int) * 1);
+	int		*data_ref = malloc(sizeof(int) * 1);
+
+	*n8 = 42;
+	*data_ref = 42;
+	ft_list_push_front(&list, n8);
+	ft_list_remove_if(&list, data_ref, &strcmp, &free);
+
+	printf("ptr = %p, data = %d, next = %p\n", list,
+			*(int*)list->data, list->next);
+	printf("ptr = %p, data = %d, next = %p\n", list->next,
+			*(int*)(list->next)->data, list->next->next);
 	return 0;
 }

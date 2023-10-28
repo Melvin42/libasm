@@ -5,7 +5,9 @@
 ft_create_elem:
 			push	rdi
 			mov		rdi, 16
+			push	rdx ; align stack? or save rdx?
 			call	malloc wrt ..plt
+			pop		rdx
 			test	rax, rax
 			jz		fail_exit;
 			pop		rdi
@@ -16,9 +18,7 @@ ft_create_elem:
 ft_list_push_front:
 			mov		rdx, rdi ; rdi **begin
 			mov		rdi, rsi ; rsi data
-			push	rcx
 			call	ft_create_elem ; elem in rax
-			pop		rcx
 			mov		rsi, [rdx]
 			mov		qword [rax + 8], rsi
 			mov		qword [rdx], rax
