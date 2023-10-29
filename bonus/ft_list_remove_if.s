@@ -1,6 +1,10 @@
 			global	ft_list_remove_if
 			section	.text
 
+	; r8 == begin_list
+	; [r8] == *begin_list
+	; [[r8]] = *begin_list->data
+	; [[r8 + 8]] == *begin_list->next
 			;rdi = *begin
 			;rsi = data_ref
 			;rdx = cmp
@@ -21,28 +25,33 @@ loop_remove_first_elem:
 			pop		rdx
 			cmp		rax, 0x0
 			jne		loop_remove_other_elem
+			mov		r8, qword [r8]
+			mov		r11, qword [r8]
+			mov		r9, qword [r8 + 8]
 			push	rdx
 			push	rcx
 			push	r8
+			push	r11
+			push	rsi
 			call	rcx
+			pop		rsi
+			pop		r11
 			pop		r8
 			pop		rcx
 			pop		rdx
-			mov		r9, r8
-			mov		r8, qword [r8 + 8]
-			mov		rdi, r9
+			mov		rdi, r8
 			push	rdx
 			push	rcx
-			push	r8
-			mov		rdi, r9
+			push	rsi
 			call	rcx
-			pop		r8
+			pop		rsi
 			pop		rcx
 			pop		rdx
+			mov		qword [r10], r9
+			mov		r8, r10
 			jmp		loop_remove_first_elem
 
 loop_remove_other_elem:
-
 			jmp		end
 
 end:
